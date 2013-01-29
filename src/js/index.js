@@ -33,18 +33,38 @@ function convertKmToMiles(inputValue, fix) {
 }
 
 $(document).ready(function () {
-	$('#pace-calculator form').each(function() {
-		var form = $(this);
+	var form = $('#pace-calculator form');
+	form.each(function() {
 		chrome.storage.sync.get('runDistance', function(r) {
 			form.find('#runDistance').val(r['runDistance']);
-			console.log(r, 'Dis', r['runDistance']);
 		});
-
+		chrome.storage.sync.get('typeDistance', function(r) {
+			form.find('#runDistance').siblings().removeClass('active').filter('[value="' + r['typeDistance'] + '"]').addClass('active');
+		});
+		chrome.storage.sync.get('runHH', function(r) {
+			form.find('#runHH').val(r['runHH']);
+		});
+		chrome.storage.sync.get('runMM', function(r) {
+			form.find('#runMM').val(r['runMM']);
+		});
+		chrome.storage.sync.get('runSS', function(r) {
+			form.find('#runSS').val(r['runSS']);
+		});
+		chrome.storage.sync.get('paceRunKm', function(r) {
+			form.find('#runPaceKm').val(r['paceRunKm']);
+		});
+		chrome.storage.sync.get('paceRunMi', function(r) {
+			form.find('#runPaceMi').val(r['paceRunMi']);
+		});
+		chrome.storage.sync.get('speedRunKm', function(r) {
+			form.find('#runSpeedKm').val(r['speedRunKm']);
+		});
+		chrome.storage.sync.get('speedRunMi', function(r) {
+			form.find('#runSpeedMi').val(r['speedRunMi']);
+		});
 	});
 	$('#runPaceCompute').click(function () {
-
-		var form = $('#pace-calculator form'),
-			runHH, runMM, runSS, secondsRun, runDistance, paceRun, speedRun, typeDistance;
+		var runHH, runMM, runSS, secondsRun, runDistance, paceRun, speedRun, typeDistance;
 		if (form.size() <= 0) {
 			//console.error('Withou form');
 			return;
@@ -72,6 +92,7 @@ $(document).ready(function () {
 			notifyError(form, 'Run Distance must ha a type');
 			return;
 		}
+		setValue('typeDistance', typeDistance);
 
 		runHH = (form.find('#runHH').val() && parseInt(form.find('#runHH').val())) || runHH;
 		runMM = (form.find('#runMM').val() && parseInt(form.find('#runMM').val())) || runMM;
@@ -83,6 +104,10 @@ $(document).ready(function () {
 			//console.error('Run Time must be grater than 0');
 			return;
 		}
+		setValue('runHH', runHH);
+		setValue('runMM', runMM);
+		setValue('runSS', runSS);
+
 		paceRun = (secondsRun / runDistance);
 		if (typeDistance == 'km') {
 			// convert from km to miles
@@ -93,7 +118,7 @@ $(document).ready(function () {
 			paceRunKm = convertKmToMiles(paceRun);
 			paceRunMi = paceRun.toFixed(2);
 		}
-		console.log(paceRun, paceRunKm, paceRunMi)
+		//console.log(paceRun, paceRunKm, paceRunMi)
 		paceRunKm = secondsToTime(paceRunKm);
 		paceRunMi = secondsToTime(paceRunMi);
 
@@ -110,10 +135,14 @@ $(document).ready(function () {
 		//console.log('runHH', runHH, 'runMM', runMM, 'runSS', runSS, 'secondsRun', secondsRun, 'runDistance', runDistance, 'paceRun', paceRun, 'speedRun', speedRun);
 
 		form.find('#runPaceKm').val(paceRunKm);
+		setValue('paceRunKm', paceRunKm);
 		form.find('#runPaceMi').val(paceRunMi);
+		setValue('paceRunMi', paceRunMi);
 
 		form.find('#runSpeedKm').val(speedRunKm);
+		setValue('speedRunKm', speedRunKm);
 		form.find('#runSpeedMi').val(speedRunMi);
+		setValue('speedRunMi', speedRunMi);
 		//runPaceCompute();
 	});
 });

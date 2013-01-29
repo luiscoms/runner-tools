@@ -1,17 +1,17 @@
 {
 	"name": "Running Tools",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Running Tools. Just a calculator to calculate running pace based on distance and time.",
 	"manifest_version": 2,
 	"icons": {
-		"16": "icons/icon_19.png",
+		"16": "icons/icont_19.png",
 		"48": "icons/icon_48.png",
 		"128": "icons/icon_128.png"
 	},
-	"permissions": ["http://*.jquery.com/", "https://*.google.com/","storage"],
+	"permissions": ["storage"],
 	"browser_action": {
 		"default_title": "",
-		"default_icon": "icons/icon_19.png",
+		"default_icon": "icons/icont_19.png",
 		"default_popup": "index.htm"
 	}
 }
