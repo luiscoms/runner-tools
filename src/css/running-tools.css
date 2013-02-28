@@ -12,3 +12,9 @@ body {
 #pace-calculator #runDistance {
 	float: left;
 }
+footer p,
+footer a {
+	vertical-align: text-top;
+	line-height: 14px;
+	margin: 0;
+}
