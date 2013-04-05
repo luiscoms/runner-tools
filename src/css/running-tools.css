@@ -9,7 +9,7 @@ body {
 .input-mini {
 	width: 50px !important;
 }
-#pace-calculator #runDistance {
+.fleft {
 	float: left;
 }
 footer p,

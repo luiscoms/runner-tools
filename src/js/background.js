@@ -1,1 +1,1 @@
-chrome.browserAction.setBadgeText({'text': 'beta'});
+chrome.browserAction.setBadgeText({'text': 'alfa'});

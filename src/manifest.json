@@ -1,7 +1,7 @@
 {
-	"name": "Running Tools",
-	"version": "1.0.3",
-	"description": "Just a calculator to calculate running pace based on distance and time.",
+	"name": "Runner Tools",
+	"version": "1.2.0",
+	"description": "Easy way to calculate running pace and calories burned on an activity.",
 	"manifest_version": 2,
 	"icons": {
 		"16": "icons/icont_19.png",

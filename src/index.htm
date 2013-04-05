@@ -23,12 +23,12 @@
 			<div class="span12">
 				<div class="accordion" id="calcs">
 					<div class="accordion-group">
-						<!--div class="accordion-heading">
+						<div class="accordion-heading">
 							<a class="accordion-toggle" data-toggle="collapse" data-parent="#calcs" href="#pace-calculator">
 								Pace Calculator
 							</a>
-						</div-->
-						<div id="pace-calculator" class="accordion-body collapse in">
+						</div>
+						<div id="pace-calculator" class="accordion-body collapse">
 							<div class="accordion-inner">
 
 								<form class="form-horizontal">
@@ -41,14 +41,14 @@
 											<label class="control-label" for="runDistance">Run Distance:</label>
 											<div class="controls">
 												<div class="btn-group" data-toggle="buttons-radio">
-													<input type="text" id="runDistance" class="input-mini" placeholder="0"/>
+													<input type="text" id="runDistance" class="input-mini fleft" placeholder="0"/>
 													<button type="button" class="btn active" value="km">Km</button>
 													<button type="button" class="btn" value="mi">Miles</button>
 												</div>
 											</div>
 										</div>
 										<div class="control-group">
-											<label class="control-label" for="runDistance">Run Time:</label>
+											<label class="control-label" for="runTime">Run Time:</label>
 											<div class="controls">
 												<div class="input-prepend">
 													<span class="add-on">HH</span><input class="input-xmini" id="runHH" name="runHH" type="text" maxlength="2" placeholder="00"/><span class="add-on">MM</span><input class="input-xmini" id="runMM" name="runMM" type="text" maxlength="2" placeholder="00"/><span class="add-on">SS</span><input class="input-xmini" id="runSS" name="runSS" type="text" maxlength="2" placeholder="00"/>
@@ -81,18 +81,68 @@
 							</div>
 						</div>
 					</div>
-					<!--div class="accordion-group">
+					<div class="accordion-group">
 						<div class="accordion-heading">
-							<a class="accordion-toggle" data-toggle="collapse" data-parent="#calcs" href="#collapseTwo">
-								Convert Running Pace
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#calcs" href="#calorie-calculator">
+								Calorie Calculator
 							</a>
 						</div>
-						<div id="collapseTwo" class="accordion-body collapse">
+						<div id="calorie-calculator" class="accordion-body collapse in">
 							<div class="accordion-inner">
-								Soon
+								<form class="form-horizontal">
+									<fieldset>
+										<legend>Calculate Calories Burned</legend>
+										<div class="formMsg">
+
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="weight">Your weight:</label>
+											<div class="controls">
+												<div class="btn-group" data-toggle="buttons-radio">
+													<input type="text" id="weight" class="input-mini fleft" placeholder="0"/>
+													<button type="button" class="btn active" value="kg">Kg</button>
+													<button type="button" class="btn" value="lb">Pounds</button>
+												</div>
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="sport">Sport:</label>
+											<div class="controls">
+												<div class="btn-group" data-toggle="buttons-radio">
+													<button type="button" class="sport btn active" value="rn">Running</button>
+													<button type="button" class="sport btn" value="bk">Biking</button>
+													<button type="button" class="sport btn" value="sw">Swimming</button>
+												</div>
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="distance">Distance:</label>
+											<div class="controls">
+												<div class="btn-group" data-toggle="buttons-radio">
+													<input type="text" id="distance" class="input-mini fleft" placeholder="0"/>
+													<button type="button" class="btn active" value="km">Km</button>
+													<button type="button" class="btn" value="mi">Miles</button>
+													<button type="button" class="btn" value="yd">Yards</button>
+													<button type="button" class="btn" value="mt">Meters</button>
+												</div>
+											</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="runDistance">Calories burned:</label>
+											<div class="controls">
+												<input type="text" id="caloriesBurned" readonly="readonly" class="input-mini"/>
+											</div>
+										</div>
+										<div class="control-group">
+											<div class="controls">
+												<button class="btn" type="button" id="caloriesCompute">Calculate Calories</button>
+											</div>
+										</div>
+									</fieldset>
+								</form>
 							</div>
 						</div>
-					</div-->
+					</div>
 				</div>
 
 			</div>

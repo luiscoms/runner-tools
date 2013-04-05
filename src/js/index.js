@@ -33,7 +33,11 @@ function convertKmToMiles(inputValue, fix) {
 }
 
 $(document).ready(function () {
-	var form = $('#pace-calculator form');
+	// PACE CALCULATOR
+	var form = $('#pace-calculator form'),
+	// CALORIE CALCULATOR
+		calorieForm = $('#calorie-calculator form');
+	// FILL FIELDS WHITH STORAGE VALUE
 	form.each(function() {
 		chrome.storage.sync.get('runDistance', function(r) {
 			form.find('#runDistance').val(r['runDistance']);
@@ -63,6 +67,11 @@ $(document).ready(function () {
 			form.find('#runSpeedMi').val(r['speedRunMi']);
 		});
 	});
+	// FILL FIELDS WHITH STORAGE VALUE
+	// calorieForm.each(function() {
+	// });
+	// BIND EVENT
+	calorieForm.on('click', '#caloriesCompute', calcCalories);
 	$('#runPaceCompute').click(function () {
 		var runHH, runMM, runSS, secondsRun, runDistance, paceRun, speedRun, typeDistance;
 		if (form.size() <= 0) {
@@ -146,6 +155,77 @@ $(document).ready(function () {
 		//runPaceCompute();
 	});
 });
+
+function calcCalories() {
+	var form = $('#calorie-calculator form'),
+		weight,
+		weightUnit,
+		distance,
+		distanceUnit,
+		coefficient,
+		sport,
+		caloriesBurned;
+
+	//clear form
+	clearNotify(form);
+	form.find('#calories').val('');
+	// reset vars
+	weight = distance = coefficient = caloriesBurned = 0;
+	weightUnit = distanceUnit = sport = '';
+
+	weight = (form.find('#weight').val() && parseFloat(form.find('#weight').val())) || weight;
+	if (!weight || weight <= 0) {
+		notifyError(form, 'Weight must be grater than 0');
+		//console.error('Run Distance must be grater than 0');
+		return;
+	}
+	weightUnit = form.find('#weight').siblings('.active').val();
+	if (!weightUnit) {
+		notifyError(form, 'Specify weight unit');
+		return;
+	}
+	// convert pounds to kg
+	if (weightUnit == 'kg') {
+		weight = weight * 2.2046;
+	}
+	sport = form.find('.sport.active').val();
+	if (sport == 'rn') {
+		coefficient = 0.790;
+	} else if (sport == 'bk') {
+		coefficient = 0.28;
+	} else if (sport == 'sw') {
+		coefficient = 2.93;
+	} else {
+		sport = '';
+	}
+	if (!sport) {
+		notifyError(form, 'Specify a sport');
+		return;
+	}
+	distance = (form.find('#distance').val() && parseFloat(form.find('#distance').val())) || distance;
+	if (!distance || distance <= 0) {
+		notifyError(form, 'Distance must be grater than 0');
+		return;
+	}
+	distanceUnit = form.find('#distance').siblings('.active').val();
+	// convert miles to ...
+	if (distanceUnit == 'km') {
+		distance /= 1.609344;
+	} else if (distanceUnit == 'mi') {
+	} if (distanceUnit == 'yd') {
+		distance /= 1760;
+	} else if (distanceUnit == 'mt') {
+		distance /= 1609.344;
+	} else {
+		distanceUnit = '';
+	}
+	if (!distanceUnit) {
+		notifyError(form, 'Specify distance unit');
+		return;
+	}
+	caloriesBurned = Math.round(coefficient * weight * distance);
+	form.find('#caloriesBurned').val(caloriesBurned);
+}
 
 function clearNotify(form) {
 	form
