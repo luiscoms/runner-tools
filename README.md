@@ -1,7 +1,9 @@
 running-tools
 =============
 
-Running Tools
+Runner Tools
 
 This is a chrome extension.
-Just a calculator to calculate running pace based on distance and time.
+Calculate running pace and calories burned on an activity.
+
+http://runner-tools.com

@@ -33,6 +33,16 @@ function convertKmToMiles(inputValue, fix) {
 }
 
 $(document).ready(function () {
+	// WHAT IS NEW in RUNNER-TOOLS
+	chrome.runtime.getBackgroundPage(function(w){ w.getWhatIsNew(); });
+	// GET AND SAVE THE CURRENT TOOL
+	$('.collapse').on('show', function () {
+		setValue('cutrrentTool', $(this).attr('id'));
+	});
+	chrome.storage.sync.get('cutrrentTool', function(r) {
+		var cutrrentTool = r['cutrrentTool'] || 'calorie-calculator';
+		$('a[href="#' + cutrrentTool + '"]').click();
+	});
 	// PACE CALCULATOR
 	var form = $('#pace-calculator form'),
 	// CALORIE CALCULATOR
